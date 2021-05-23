@@ -4,6 +4,8 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 import Background from "../assets/background.jsx";
 import Logo from "../assets/logo.png";
 
+import BottomMenu from "../components/BottomMenu";
+
 export default function Home() {
   const styles = StyleSheet.create({
     container: {
@@ -15,14 +17,14 @@ export default function Home() {
       height: 48,
       backgroundColor: "#FF5656",
       borderRadius: 10,
-      justifyContent: 'center',
-      alignItems: 'center',
+      justifyContent: "center",
+      alignItems: "center",
       marginTop: 50,
     },
     text: {
       color: "white",
       fontSize: 24,
-      fontWeight: 'bold'
+      fontWeight: "bold",
     },
     logo: {
       width: 290,
@@ -47,6 +49,7 @@ export default function Home() {
         <Image source={Logo} style={styles.logo} />
       </View>
       <View>{startButton}</View>
+      <BottomMenu />
     </View>
   );
 }
