@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import Background from '../assets/background.jsx';
 
 export default function Home() {
   const styles = StyleSheet.create({
@@ -12,10 +14,7 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <Text> Home</Text>
-      <Button
-      title="Click Here"
-      />
+      <Background/>
     </View>
   );
 }
