@@ -1,43 +1,52 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import React from "react";
+import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
-import Background from '../assets/background.jsx';
+import Background from "../assets/background.jsx";
+import Logo from "../assets/logo.png";
 
 export default function Home() {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: "center",
-      justifyContent: "center",
     },
-    buttonLabelStyle: {
-      color: "white",
-      fontSize: 24,
-      textTransform: 'none',
-    },
-    buttonContentStyle: {
+    button: {
       width: 250,
       height: 48,
-    }
+      backgroundColor: "#FF5656",
+      borderRadius: 10,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 50,
+    },
+    text: {
+      color: "white",
+      fontSize: 24,
+      fontWeight: 'bold'
+    },
+    logo: {
+      width: 290,
+      height: 175,
+      marginTop: 185,
+    },
   });
 
   const startButton = (
-    <Button
-      mode="contained"
-      color="#FF5656"
-      children='Start'
-      contentStyle={styles.buttonContentStyle}
-      labelStyle={styles.buttonLabelStyle}
+    <TouchableOpacity
+      style={styles.button}
       onPress={() => console.log("Pressed")}
     >
-    </Button>
+      <Text style={styles.text}>Start</Text>
+    </TouchableOpacity>
   );
 
   return (
     <View style={styles.container}>
       <Background />
-      {startButton}
+      <View>
+        <Image source={Logo} style={styles.logo} />
+      </View>
+      <View>{startButton}</View>
     </View>
   );
 }
