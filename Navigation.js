@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import HomeScreen from "./screens/Home";
 import AboutScreen from "./screens/About";
+import HistoryScreen from "./screens/History";
 
 export default function Navigation() {
   const Stack = createStackNavigator();
@@ -13,6 +14,7 @@ export default function Navigation() {
       <Stack.Navigator headerMode={"none"} initialRouteName={"Home"}>
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
+        <Stack.Screen name="History" component={HistoryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

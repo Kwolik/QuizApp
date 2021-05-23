@@ -3,10 +3,9 @@ import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
 
 import Background from "../assets/background.jsx";
 import Logo from "../assets/logo.png";
-
 import BottomMenu from "../components/BottomMenu";
 
-export default function Home() {
+export default function Home({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -49,7 +48,7 @@ export default function Home() {
         <Image source={Logo} style={styles.logo} />
       </View>
       <View>{startButton}</View>
-      <BottomMenu />
+      <BottomMenu navigation={navigation}/>
     </View>
   );
 }
