@@ -1,7 +1,14 @@
 import React from "react";
-import { StyleSheet, View, Image, Text, TouchableOpacity } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+} from "react-native";
 
-import Background from "../assets/background.jsx";
+import bg from "../assets/bg.png";
 import Logo from "../assets/logo.png";
 import BottomMenu from "../components/BottomMenu";
 
@@ -10,6 +17,9 @@ export default function Home({ navigation }) {
     container: {
       flex: 1,
       alignItems: "center",
+    },
+    back: {
+      flex: 1,
     },
     button: {
       width: 250,
@@ -42,13 +52,14 @@ export default function Home({ navigation }) {
   );
 
   return (
-    <View style={styles.container}>
-      <Background />
-      <View>
-        <Image source={Logo} style={styles.logo} />
+    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+      <View style={styles.container}>
+        <View>
+          <Image source={Logo} style={styles.logo} />
+        </View>
+        <View>{startButton}</View>
+        <BottomMenu navigation={navigation} />
       </View>
-      <View>{startButton}</View>
-      <BottomMenu navigation={navigation}/>
-    </View>
+    </ImageBackground>
   );
 }
