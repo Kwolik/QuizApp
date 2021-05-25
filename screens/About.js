@@ -1,22 +1,25 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, ImageBackground } from "react-native";
 
-import Background from "../assets/background.jsx";
+import bg from "../assets/bg.png";
 import BottomMenu from "../components/BottomMenu";
 
-export default function About({navigation}) {
+export default function About({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: "center",
     },
+    back: {
+      flex: 1,
+    },
   });
 
   return (
-    <View style={styles.container}>
-        <Background />
-        <Text>About</Text>
-        <BottomMenu navigation={navigation}/>
-    </View>
+    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+      <View style={styles.container}>
+        <BottomMenu navigation={navigation} />
+      </View>
+    </ImageBackground>
   );
 }
