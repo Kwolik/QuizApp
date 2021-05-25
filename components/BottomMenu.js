@@ -17,8 +17,8 @@ export default function BottomMenu( props ) {
       justifyContent: "center",
     },
     text: {
-      fontSize: 20,
-      color: "white",
+      fontSize: 21,
+      color: "#fafafa",
     },
   });
 
@@ -29,7 +29,7 @@ export default function BottomMenu( props ) {
         style={styles.button}
         onPress={() => props.navigation.navigate("History")}
       >
-        <FontAwesome name="history" size={64} color={"white"} />
+        <FontAwesome name="history" size={48} color={"#fafafa"} />
         <Text style={styles.text}>History</Text>
       </TouchableOpacity>
 
@@ -38,7 +38,7 @@ export default function BottomMenu( props ) {
         style={styles.button}
         onPress={() => props.navigation.navigate("Home")}
       >
-        <FontAwesome name="home" size={64} color={"white"} />
+        <FontAwesome name="home" size={48} color={"#fafafa"} />
         <Text style={styles.text}>Home</Text>
       </TouchableOpacity>
 
@@ -47,7 +47,7 @@ export default function BottomMenu( props ) {
         style={styles.button}
         onPress={() => props.navigation.navigate("About")}
       >
-        <MaterialIcons name="group-work" size={64} color={"white"} />
+        <MaterialIcons name="group-work" size={48} color={"#fafafa"} />
         <Text style={styles.text}>About</Text>
       </TouchableOpacity>
     </View>
