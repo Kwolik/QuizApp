@@ -12,7 +12,7 @@ export default function Navigation() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode={"none"} initialRouteName={"Home"}>
+      <Stack.Navigator headerMode="none" initialRouteName="Home">
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="History" component={HistoryScreen} />

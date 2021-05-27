@@ -61,7 +61,7 @@ export default function Category({ navigation }) {
     },
   });
 
-  const [category, SetCategory] = React.useState([]);
+  const [category, setCategory] = React.useState([]);
 
   const getMovieRequest = async () => {
     const url = `https://opentdb.com/api_category.php`;
@@ -70,7 +70,7 @@ export default function Category({ navigation }) {
     const responseJson = await response.json();
 
     if (responseJson.trivia_categories) {
-      SetCategory(responseJson.trivia_categories);
+      setCategory(responseJson.trivia_categories);
     }
   };
 
