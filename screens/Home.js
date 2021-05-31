@@ -45,7 +45,7 @@ export default function Home({ navigation }) {
   const startButton = (
     <TouchableOpacity
       style={styles.button}
-      onPress={() => console.log("Pressed")}
+      onPress={() => navigation.navigate("Category")}
     >
       <Text style={styles.text}>Start</Text>
     </TouchableOpacity>
