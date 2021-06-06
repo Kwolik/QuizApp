@@ -1,11 +1,11 @@
-import React from "react";
-import { createStackNavigator } from "@react-navigation/stack";
-import { NavigationContainer } from "@react-navigation/native";
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
 
-import HomeScreen from "./screens/Home";
-import AboutScreen from "./screens/About";
-import HistoryScreen from "./screens/History";
-import CategoryScreen from "./screens/Category";
+import HomeScreen from './screens/Home';
+import AboutScreen from './screens/About';
+import HistoryScreen from './screens/History';
+import CategoryScreen from './screens/Category';
 
 export default function Navigation() {
   const Stack = createStackNavigator();

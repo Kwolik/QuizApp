@@ -1,14 +1,14 @@
-import React from "react";
-import { StyleSheet, View, ImageBackground } from "react-native";
+import React from 'react';
+import { StyleSheet, View, ImageBackground } from 'react-native';
 
-import bg from "../assets/bg.png";
-import BottomMenu from "../components/BottomMenu";
+import bg from '../assets/bg.png';
+import BottomMenu from '../components/BottomMenu';
 
 export default function About({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
+      alignItems: 'center',
     },
     back: {
       flex: 1,
