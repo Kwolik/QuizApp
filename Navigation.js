@@ -6,6 +6,7 @@ import HomeScreen from "./screens/Home";
 import AboutScreen from "./screens/About";
 import HistoryScreen from "./screens/History";
 import CategoryScreen from "./screens/Category";
+import QuestionNumber from "./screens/QuestionNumber";
 
 export default function Navigation() {
   const Stack = createStackNavigator();
@@ -17,6 +18,7 @@ export default function Navigation() {
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="History" component={HistoryScreen} />
         <Stack.Screen name="Category" component={CategoryScreen} />
+        <Stack.Screen name="QuestionNumber" component={QuestionNumber} />
       </Stack.Navigator>
     </NavigationContainer>
   );
