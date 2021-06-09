@@ -11,7 +11,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import bg from "../assets/bg.png";
 
-export default function Category({ navigation }) {
+export default function QuestionNumber({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -61,37 +61,17 @@ export default function Category({ navigation }) {
     },
   });
 
-  const [category, setCategory] = React.useState([]);
+  const number = [6, 7, 8, 9, 10, 11, 12];
 
-  const getMovieRequest = async () => {
-    const url = `https://opentdb.com/api_category.php`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.trivia_categories) {
-      setCategory(responseJson.trivia_categories);
-    }
-  };
-
-  React.useEffect(() => {
-    getMovieRequest();
-  }, []);
-
-  const categoryList = category.map((categories) => (
+  const numberList = number.map((numbers) => (
     <TouchableOpacity
-      key={categories.id}
+      key={numbers}
       style={styles.button}
       onPress={() => {
-        global.CATEGORY = categories.id;
-        navigation.navigate("QuestionNumber");
+        global.NUMBER = numbers;
       }}
     >
-      <Text style={styles.name}>
-        {categories.name.search("Entertainment") === 0
-          ? categories.name.replace("Entertainment: ", "")
-          : categories.name.replace("Science: ", "")}
-      </Text>
+      <Text style={styles.name}>{numbers}</Text>
     </TouchableOpacity>
   ));
 
@@ -104,10 +84,10 @@ export default function Category({ navigation }) {
         >
           <MaterialIcons name="arrow-back-ios" size={28} color={"#2D2D2D"} />
         </TouchableOpacity>
-        <Text style={styles.title}>Category</Text>
+        <Text style={styles.title}>Quiz number</Text>
         <View style={styles.list}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            {categoryList}
+            {numberList}
           </ScrollView>
         </View>
       </View>
