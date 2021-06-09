@@ -56,15 +56,13 @@ const styles = StyleSheet.create({
   },
 });
 
-const Question = ({ navigation, route }) => {
-  const { categoryId } = route.params;
-
+const Question = ({ navigation }) => {
   const [questions, setQuestions] = React.useState([]);
   const [currentQuestionId, setCurrentQuestionId] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    getQuestions(categoryId)
+    getQuestions(global.CATEGORY, global.NUMBER)
       .then((res) => setQuestions(res.map((question, index) => ({ ...question, id: index }))))
       .then(() => setCurrentQuestionId(0))
       .then(() => setIsLoading(false));
