@@ -7,6 +7,7 @@ import AboutScreen from "./screens/About";
 import HistoryScreen from "./screens/History";
 import CategoryScreen from "./screens/Category";
 import QuestionNumber from "./screens/QuestionNumber";
+import TypeScreen from "./screens/Type";
 
 export default function Navigation() {
   const Stack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function Navigation() {
         <Stack.Screen name="History" component={HistoryScreen} />
         <Stack.Screen name="Category" component={CategoryScreen} />
         <Stack.Screen name="QuestionNumber" component={QuestionNumber} />
+        <Stack.Screen name="Type" component={TypeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
