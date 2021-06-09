@@ -69,6 +69,7 @@ export default function QuestionNumber({ navigation }) {
       style={styles.button}
       onPress={() => {
         global.NUMBER = numbers;
+        navigation.navigate("Loading");
       }}
     >
       <Text style={styles.name}>{numbers}</Text>

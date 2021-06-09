@@ -48,7 +48,7 @@ export default function Loading({ navigation }) {
         <View>
           <Image source={Logo} style={styles.logo} />
         </View>
-        <View>{startButton}</View>
+        <View></View>
       </View>
     </ImageBackground>
   );
