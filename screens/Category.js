@@ -72,7 +72,11 @@ export default function Category({ navigation }) {
   }, []);
 
   const categoryList = category.map((categories) => (
-    <TouchableOpacity key={categories.id} style={styles.button}>
+    <TouchableOpacity
+      key={categories.id}
+      style={styles.button}
+      onPress={() => navigation.navigate('Question', { categoryId: categories.id })}
+    >
       <Text style={styles.name}>
         {categories.name.search('Entertainment') === 0
           ? categories.name.replace('Entertainment: ', '')
