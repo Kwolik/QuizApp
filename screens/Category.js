@@ -79,7 +79,14 @@ export default function Category({ navigation }) {
   }, []);
 
   const categoryList = category.map((categories) => (
-    <TouchableOpacity key={categories.id} style={styles.button}>
+    <TouchableOpacity
+      key={categories.id}
+      style={styles.button}
+      onPress={() => {
+        global.CATEGORY = categories.id;
+        navigation.navigate("QuestionNumber");
+      }}
+    >
       <Text style={styles.name}>
         {categories.name.search("Entertainment") === 0
           ? categories.name.replace("Entertainment: ", "")
@@ -99,7 +106,9 @@ export default function Category({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.title}>Category</Text>
         <View style={styles.list}>
-          <ScrollView>{categoryList}</ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            {categoryList}
+          </ScrollView>
         </View>
       </View>
     </ImageBackground>
