@@ -10,7 +10,6 @@ import {
 
 import bg from "../assets/bg.png";
 import Logo from "../assets/logo.png";
-import BottomMenu from "../components/BottomMenu";
 
 export default function Loading({ navigation }) {
   const styles = StyleSheet.create({
@@ -21,19 +20,10 @@ export default function Loading({ navigation }) {
     back: {
       flex: 1,
     },
-    button: {
-      width: 250,
-      height: 48,
-      backgroundColor: "#FF5656",
-      borderRadius: 10,
-      justifyContent: "center",
-      alignItems: "center",
-      marginTop: 50,
-    },
     text: {
-      color: "white",
-      fontSize: 24,
-      fontWeight: "bold",
+      color: "black",
+      fontSize: 18,
+      maxWidth: "80%",
     },
     logo: {
       width: 290,
@@ -47,6 +37,8 @@ export default function Loading({ navigation }) {
     },
   });
 
+  const [message, setMessage] = React.useState("Download data in progress...");
+
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
       <View style={styles.container}>
@@ -55,6 +47,11 @@ export default function Loading({ navigation }) {
         </View>
         <View style={styles.horizontal}>
           <ActivityIndicator size={100} color="#999999"/>
+        </View>
+        <View>
+            <Text style={styles.text}>
+                {message}
+            </Text>
         </View>
       </View>
     </ImageBackground>
