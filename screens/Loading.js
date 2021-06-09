@@ -4,7 +4,7 @@ import {
   View,
   Image,
   Text,
-  TouchableOpacity,
+  ActivityIndicator,
   ImageBackground,
 } from "react-native";
 
@@ -40,6 +40,11 @@ export default function Loading({ navigation }) {
       height: 175,
       marginTop: 185,
     },
+    horizontal: {
+      flexDirection: "row",
+      justifyContent: "space-around",
+      padding: 10,
+    },
   });
 
   return (
@@ -48,7 +53,9 @@ export default function Loading({ navigation }) {
         <View>
           <Image source={Logo} style={styles.logo} />
         </View>
-        <View></View>
+        <View style={styles.horizontal}>
+          <ActivityIndicator size={100} color="#999999"/>
+        </View>
       </View>
     </ImageBackground>
   );
