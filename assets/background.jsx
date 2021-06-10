@@ -1,14 +1,14 @@
-import * as React from "react"
-import { StyleSheet} from 'react-native';
-import Svg, { Path } from "react-native-svg"
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import Svg, { Path } from 'react-native-svg';
 
 function SvgComponent(props) {
   const styles = StyleSheet.create({
     background: {
-      position: "absolute",
+      position: 'absolute',
     },
   });
-  
+
   return (
     <Svg
       xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ function SvgComponent(props) {
         fill="#ff58ff"
       />
     </Svg>
-  )
+  );
 }
 
-export default SvgComponent
+export default SvgComponent;
