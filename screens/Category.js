@@ -77,7 +77,7 @@ export default function Category({ navigation }) {
       style={styles.button}
       onPress={() => {
         global.CATEGORY = categories.id;
-        navigation.navigate('QuestionNumber');
+        navigation.navigate('Difficulty');
       }}
     >
       <Text style={styles.name}>
