@@ -9,7 +9,6 @@ import CategoryScreen from './screens/Category';
 import QuestionScreen from './screens/Question/Question';
 import QuestionNumber from './screens/QuestionNumber';
 import TypeScreen from './screens/Type';
-import LoadingScreen from './screens/Loading';
 import DifficultyScreen from './screens/Difficulty';
 
 export default function Navigation() {
@@ -25,7 +24,6 @@ export default function Navigation() {
         <Stack.Screen name="Question" component={QuestionScreen} />
         <Stack.Screen name="QuestionNumber" component={QuestionNumber} />
         <Stack.Screen name="Type" component={TypeScreen} />
-        <Stack.Screen name="Loading" component={LoadingScreen} /> 
         <Stack.Screen name="Difficulty" component={DifficultyScreen} />
       </Stack.Navigator>
     </NavigationContainer>

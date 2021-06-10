@@ -71,13 +71,28 @@ const Question = ({ navigation }) => {
   const [questions, setQuestions] = React.useState([]);
   const [currentQuestionId, setCurrentQuestionId] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
+  const [message, setMessage] = React.useState("Download data in progress...");
 
   React.useEffect(() => {
     getQuestions(CATEGORY, NUMBER, DIFFICULTY, TYPE)
-      .then((res) => setQuestions(res.map((question, index) => ({ ...question, id: index }))))
-      .then(() => setCurrentQuestionId(0))
-      .then(() => setIsLoading(false));
+      .then((res) => validationRequest(res));
   }, []);
+
+  function validationRequest(res) {
+    if(res.response_code === 0) { 
+      setQuestions(res.results.map((question, index) => ({ ...question, id: index })))
+      setCurrentQuestionId(0)
+      setIsLoading(false) 
+    }
+
+    else if(res.response_code === 1) {
+      setMessage("Error! No Results!")
+    }
+
+    else if (res.response_code == 2) {
+      setMessage("Error! Invalid Parameter!")
+    }
+  }
 
   const answerQuestion = () => {
     if (questions.length - 1 <= currentQuestionId) {
@@ -86,8 +101,6 @@ const Question = ({ navigation }) => {
 
     setCurrentQuestionId((prevState) => prevState + 1);
   };
-
-  const [message, setMessage] = React.useState("Download data in progress...");
 
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
