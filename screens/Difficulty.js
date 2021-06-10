@@ -5,13 +5,12 @@ import {
   ImageBackground,
   TouchableOpacity,
   Text,
-  ScrollView,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import bg from "../assets/bg.png";
 
-export default function Category({ navigation }) {
+export default function Difficulty({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -51,49 +50,16 @@ export default function Category({ navigation }) {
       elevation: 5,
     },
     list: {
+      flex: 1,
       margin: 10,
-      marginTop: "18%",
-      height: "52%",
+      marginBottom: "40%",
+      justifyContent: "center",
     },
     name: {
       color: "#2D2D2D",
       fontSize: 18,
     },
   });
-
-  const [category, setCategory] = React.useState([]);
-
-  const getMovieRequest = async () => {
-    const url = `https://opentdb.com/api_category.php`;
-
-    const response = await fetch(url);
-    const responseJson = await response.json();
-
-    if (responseJson.trivia_categories) {
-      setCategory(responseJson.trivia_categories);
-    }
-  };
-
-  React.useEffect(() => {
-    getMovieRequest();
-  }, []);
-
-  const categoryList = category.map((categories) => (
-    <TouchableOpacity
-      key={categories.id}
-      style={styles.button}
-      onPress={() => {
-        global.CATEGORY = categories.id;
-        navigation.navigate("Difficulty");
-      }}
-    >
-      <Text style={styles.name}>
-        {categories.name.search("Entertainment") === 0
-          ? categories.name.replace("Entertainment: ", "")
-          : categories.name.replace("Science: ", "")}
-      </Text>
-    </TouchableOpacity>
-  ));
 
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
@@ -104,11 +70,38 @@ export default function Category({ navigation }) {
         >
           <MaterialIcons name="arrow-back-ios" size={28} color={"#2D2D2D"} />
         </TouchableOpacity>
-        <Text style={styles.title}>Category</Text>
+        <Text style={styles.title}>Difficulty</Text>
+
         <View style={styles.list}>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {categoryList}
-          </ScrollView>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("#", { difficulty: "easy" })}>
+            <Text style={styles.name}>
+              Easy
+                </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("#", { difficulty: "medium" })}>
+            <Text style={styles.name}>
+              Medium
+                </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("#", { difficulty: "hard" })}>
+            <Text style={styles.name}>
+              Hard
+                </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("#", { difficulty: "" })}>
+            <Text style={styles.name}>
+              Any
+                </Text>
+          </TouchableOpacity>
+
         </View>
       </View>
     </ImageBackground>
