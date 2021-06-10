@@ -73,7 +73,7 @@ const Question = ({ navigation }) => {
   const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
-    getQuestions(global.CATEGORY, global.NUMBER)
+    getQuestions(CATEGORY, NUMBER, DIFFICULTY, TYPE)
       .then((res) => setQuestions(res.map((question, index) => ({ ...question, id: index }))))
       .then(() => setCurrentQuestionId(0))
       .then(() => setIsLoading(false));
