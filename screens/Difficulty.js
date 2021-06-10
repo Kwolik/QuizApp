@@ -75,28 +75,28 @@ export default function Difficulty({ navigation }) {
         <View style={styles.list}>
 
           <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate("Type", { difficulty: "easy" })}>
+            onPress={() => {global.DIFFICULTY = "easy"; navigation.navigate("Type")}}>
             <Text style={styles.name}>
               Easy
                 </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate("Type", { difficulty: "medium" })}>
+            onPress={() => {global.DIFFICULTY = "medium"; navigation.navigate("Type")}}>
             <Text style={styles.name}>
               Medium
                 </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate("Type", { difficulty: "hard" })}>
+            onPress={() => {global.DIFFICULTY = "hard"; navigation.navigate("Type")}}>
             <Text style={styles.name}>
               Hard
                 </Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.button}
-            onPress={() => navigation.navigate("Type", { difficulty: "" })}>
+            onPress={() => {global.DIFFICULTY = ""; navigation.navigate("Type")}}>
             <Text style={styles.name}>
               Any
                 </Text>

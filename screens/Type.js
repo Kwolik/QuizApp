@@ -50,9 +50,10 @@ export default function Type({ navigation }) {
       elevation: 5,
     },
     list: {
+      flex: 1,
+      justifyContent: 'center',
       margin: 10,
-      marginTop: "50%",
-      height: "52%",
+      marginBottom: "40%",
     },
     name: {
       color: "#2D2D2D",
@@ -76,16 +77,23 @@ export default function Type({ navigation }) {
         <View style={styles.list}>
 
         <TouchableOpacity style={styles.button} 
-        onPress={() => navigation.navigate("QuestionNumber", {type:"boolean"})}> 
+        onPress={() => {global.TYPE = "boolean"; navigation.navigate("QuestionNumber")}}> 
             <Text style={styles.name}>
                 True/False
             </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate("QuestionNumber", {type:"multiple"})}>
+         onPress={() => {global.TYPE = "multiple"; navigation.navigate("QuestionNumber")}}>
             <Text style={styles.name}>
                 A/B/C/D
+            </Text>
+        </TouchableOpacity> 
+
+        <TouchableOpacity style={styles.button}
+         onPress={() => {global.TYPE = ""; navigation.navigate("QuestionNumber")}}>
+            <Text style={styles.name}>
+                Any
             </Text>
         </TouchableOpacity> 
 
