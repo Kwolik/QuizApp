@@ -10,7 +10,7 @@ import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 import bg from "../assets/bg.png";
 
-export default function Type({ navigation }) {
+export default function Difficulty({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -50,17 +50,16 @@ export default function Type({ navigation }) {
       elevation: 5,
     },
     list: {
+      flex: 1,
       margin: 10,
-      marginTop: "50%",
-      height: "52%",
+      marginBottom: "40%",
+      justifyContent: "center",
     },
     name: {
       color: "#2D2D2D",
       fontSize: 18,
     },
   });
-
- 
 
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
@@ -71,23 +70,37 @@ export default function Type({ navigation }) {
         >
           <MaterialIcons name="arrow-back-ios" size={28} color={"#2D2D2D"} />
         </TouchableOpacity>
-        <Text style={styles.title}>Type</Text>
+        <Text style={styles.title}>Difficulty</Text>
 
         <View style={styles.list}>
 
-        <TouchableOpacity style={styles.button} 
-        onPress={() => navigation.navigate("QuestionNumber", {type:"boolean"})}> 
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("Type", { difficulty: "easy" })}>
             <Text style={styles.name}>
-                True/False
-            </Text>
-        </TouchableOpacity>
+              Easy
+                </Text>
+          </TouchableOpacity>
 
-        <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate("QuestionNumber", {type:"multiple"})}>
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("Type", { difficulty: "medium" })}>
             <Text style={styles.name}>
-                A/B/C/D
-            </Text>
-        </TouchableOpacity> 
+              Medium
+                </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("Type", { difficulty: "hard" })}>
+            <Text style={styles.name}>
+              Hard
+                </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={styles.button}
+            onPress={() => navigation.navigate("Type", { difficulty: "" })}>
+            <Text style={styles.name}>
+              Any
+                </Text>
+          </TouchableOpacity>
 
         </View>
       </View>
