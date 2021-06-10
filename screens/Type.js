@@ -76,14 +76,14 @@ export default function Type({ navigation }) {
         <View style={styles.list}>
 
         <TouchableOpacity style={styles.button} 
-        onPress={() => navigation.navigate("#", {type:"boolean"})}> 
+        onPress={() => navigation.navigate("QuestionNumber", {type:"boolean"})}> 
             <Text style={styles.name}>
                 True/False
             </Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.button}
-         onPress={() => navigation.navigate("#", {type:"multiple"})}>
+         onPress={() => navigation.navigate("QuestionNumber", {type:"multiple"})}>
             <Text style={styles.name}>
                 A/B/C/D
             </Text>
