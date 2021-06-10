@@ -1,22 +1,15 @@
-import React from "react";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  ImageBackground,
-} from "react-native";
+import React from 'react';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native';
 
-import bg from "../assets/bg.png";
-import Logo from "../assets/logo.png";
-import BottomMenu from "../components/BottomMenu";
+import bg from '../assets/bg.png';
+import Logo from '../assets/logo.png';
+import BottomMenu from '../components/BottomMenu';
 
 export default function Home({ navigation }) {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      alignItems: "center",
+      alignItems: 'center',
     },
     back: {
       flex: 1,
@@ -24,16 +17,16 @@ export default function Home({ navigation }) {
     button: {
       width: 250,
       height: 48,
-      backgroundColor: "#FF5656",
+      backgroundColor: '#FF5656',
       borderRadius: 10,
-      justifyContent: "center",
-      alignItems: "center",
+      justifyContent: 'center',
+      alignItems: 'center',
       marginTop: 50,
     },
     text: {
-      color: "white",
+      color: 'white',
       fontSize: 24,
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
     logo: {
       width: 290,
@@ -43,10 +36,7 @@ export default function Home({ navigation }) {
   });
 
   const startButton = (
-    <TouchableOpacity
-      style={styles.button}
-      onPress={() => navigation.navigate("Category")}
-    >
+    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Category')}>
       <Text style={styles.text}>Start</Text>
     </TouchableOpacity>
   );
