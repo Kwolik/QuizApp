@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, Animated } from 'react-native';
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import he from 'he';
 
 const styles = StyleSheet.create({
@@ -9,13 +10,10 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   question: {
-    display: 'flex',
+    margin: 10,
+    marginTop: 20,
     justifyContent: 'center',
     alignItems: 'center',
-    minHeight: 120,
-    width: '100%',
-    padding: 16,
-    paddingTop: 56, // to be removed when timer added
   },
   button: {
     width: 320,
@@ -45,6 +43,9 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  timer: {
+    marginTop: 20,
+  }
 });
 
 const QuestionDetails = ({ question, answerQuestion }) => {
@@ -52,9 +53,33 @@ const QuestionDetails = ({ question, answerQuestion }) => {
     () => Math.random() - 0.5,
   );
 
+  const Timer = () => {
+    return(
+      <View style={styles.timer}>
+    <CountdownCircleTimer
+      isPlaying //true or false
+      duration={20}
+      colors={[
+        ['#004777', 0.4],
+        ['#F7B801', 0.4],
+        ['#A30000', 0.2],
+      ]}
+      size={120}
+    >
+      {({ remainingTime, animatedColor }) => (
+      <Animated.Text style={{ color: animatedColor, fontSize: 28}}>
+        {remainingTime}
+      </Animated.Text>
+      )}
+    </CountdownCircleTimer>
+    </View>)
+  }
+
   return (
     <>
       <Text style={styles.title}>{`Question ${question.id + 1}`}</Text>
+
+      <Timer />
 
       <View style={styles.question}>
         <Text style={styles.name}>{he.decode(question.question)}</Text>
