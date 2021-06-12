@@ -62,7 +62,11 @@ const QuestionDetails = ({ question, answerQuestion }) => {
 
       <View style={styles.list}>
         {answers.map((answer) => (
-          <TouchableOpacity key={answer} style={styles.button} onPress={answerQuestion}>
+          <TouchableOpacity
+            key={answer}
+            style={styles.button}
+            onPress={() => answerQuestion(answer === question.correct_answer)}
+          >
             <Text style={styles.name}>{he.decode(answer)}</Text>
           </TouchableOpacity>
         ))}
