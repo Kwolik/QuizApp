@@ -96,7 +96,18 @@ export default function Category({ navigation }) {
         </TouchableOpacity>
         <Text style={styles.title}>Category</Text>
         <View style={styles.list}>
-          <ScrollView showsVerticalScrollIndicator={false}>{categoryList}</ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={() => {
+                global.CATEGORY = "";
+                navigation.navigate('Difficulty');
+              }}
+            >
+              <Text style={styles.name}>Any</Text>
+            </TouchableOpacity>
+          {categoryList}
+          </ScrollView>
         </View>
       </View>
     </ImageBackground>
