@@ -71,31 +71,32 @@ const Question = ({ navigation }) => {
   const [questions, setQuestions] = React.useState([]);
   const [currentQuestionId, setCurrentQuestionId] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(true);
-  const [message, setMessage] = React.useState("Download data in progress...");
+  const [message, setMessage] = React.useState('Download data in progress...');
+  const [correctCounter, setCorrectCounter] = React.useState(0);
 
   React.useEffect(() => {
-    getQuestions(CATEGORY, NUMBER, DIFFICULTY, TYPE)
-      .then((res) => validationRequest(res));
+    getQuestions(CATEGORY, NUMBER, DIFFICULTY, TYPE).then((res) => validationRequest(res));
   }, []);
 
   function validationRequest(res) {
-    if(res.response_code === 0) { 
-      setQuestions(res.results.map((question, index) => ({ ...question, id: index })))
-      setCurrentQuestionId(0)
-      setIsLoading(false) 
-    }
-
-    else if(res.response_code === 1) {
-      setMessage("Error! No Results!")
-    }
-
-    else if (res.response_code == 2) {
-      setMessage("Error! Invalid Parameter!")
+    if (res.response_code === 0) {
+      setQuestions(res.results.map((question, index) => ({ ...question, id: index })));
+      setCurrentQuestionId(0);
+      setIsLoading(false);
+    } else if (res.response_code === 1) {
+      setMessage('Error! No Results!');
+    } else if (res.response_code == 2) {
+      setMessage('Error! Invalid Parameter!');
     }
   }
 
-  const answerQuestion = () => {
+  const answerQuestion = (isCorrect) => {
+    if (isCorrect) {
+      setCorrectCounter((prevState) => prevState + 1);
+    }
+
     if (questions.length - 1 <= currentQuestionId) {
+      navigation.navigate('Result', { result: correctCounter, questionsNumber: questions.length });
       return;
     }
 

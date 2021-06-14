@@ -10,6 +10,7 @@ import QuestionScreen from './screens/Question/Question';
 import QuestionNumber from './screens/QuestionNumber';
 import TypeScreen from './screens/Type';
 import DifficultyScreen from './screens/Difficulty';
+import ResultScreen from './screens/Result';
 
 export default function Navigation() {
   const Stack = createStackNavigator();
@@ -25,6 +26,7 @@ export default function Navigation() {
         <Stack.Screen name="QuestionNumber" component={QuestionNumber} />
         <Stack.Screen name="Type" component={TypeScreen} />
         <Stack.Screen name="Difficulty" component={DifficultyScreen} />
+        <Stack.Screen name="Result" component={ResultScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
