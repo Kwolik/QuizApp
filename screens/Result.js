@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, BackHandler } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import bg from '../assets/bg.png';
@@ -46,6 +46,12 @@ const styles = StyleSheet.create({
 
 const Result = ({ navigation, route }) => {
   const { result, questionsNumber } = route.params;
+
+  React.useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', () => true)
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', () => true)
+  }, [])
 
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
