@@ -96,6 +96,7 @@ const Question = ({ navigation }) => {
     }
 
     if (questions.length - 1 <= currentQuestionId) {
+      navigation.pop()
       navigation.navigate('Result', { result: correctCounter, questionsNumber: questions.length });
       return;
     }
