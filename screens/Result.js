@@ -1,10 +1,12 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, BackHandler } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ImageBackground, BackHandler, Alert } from 'react-native';
 import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import bg from '../assets/bg.png';
 
 const getResultText = (correctRate) => {
+  addToHistory()
+
   if (correctRate > 0.8) {
     return 'Well done!';
   }
@@ -15,6 +17,8 @@ const getResultText = (correctRate) => {
 
   return 'Maybe next time...';
 };
+
+
 
 const styles = StyleSheet.create({
   container: {
@@ -52,6 +56,47 @@ const Result = ({ navigation, route }) => {
     return () =>
       BackHandler.removeEventListener('hardwareBackPress', () => true)
   }, [])
+
+  addToHistory = () => {
+    history.index = history.index + 1
+    if(global.DIFFICULTY == "")
+      global.DIFFICULTY = "Any" 
+    if(global.NAME == "")
+      global.NAME = "Any" 
+
+    global.NAME = global.NAME.replace('Entertainment: ','');
+    global.NAME = global.NAME.replace('Science: ','');
+
+    let day = new Date().getDate();
+    let month = new Date().getMonth() + 1;
+    let year = new Date().getFullYear();
+
+    if(day < 10)
+      day = "0" + day;
+    if(month < 10)
+      month = "0" + month;
+
+    let hour = new Date().getHours(); 
+    let min = new Date().getMinutes(); 
+    let sec = new Date().getSeconds(); 
+
+    if(hour < 10)
+      hour = "0" + hour;
+    if(min < 10)
+      min = "0" + min;
+    if(sec < 10)
+      sec = "0" + sec;
+
+    let data = {
+        id: history.index,
+        date: day + '/' + month + '/' + year,
+        time: hour + ':' + min + ':' + sec,
+        answers: result + "/" + questionsNumber,
+        category: global.NAME,
+        difficulty: global.DIFFICULTY,
+    };
+    history.historyArray.push(data);
+  };
 
   return (
     <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
