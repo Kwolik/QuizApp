@@ -7,7 +7,17 @@ import BottomMenu from '../components/BottomMenu';
 
 history = {
   index: 0,
-  historyArray: [      
+  historyArray: [
+  // przykładowy rekord dla testów
+  // {
+
+  //   id: 0,
+  //   date: "12.12.2021",
+  //   time: "15:00",
+  //   answers: "10/10",
+  //   category: "Film",
+  //   difficulty: "Medium",
+  // }
 ]
 }
 
@@ -22,23 +32,15 @@ export default function History({ navigation }) {
       flex: 1,
     },
     button: {
-      width: 320,
+      width: 340,
       height: 70,
       backgroundColor: '#FAFAFA',
-      borderRadius: 18,
+      borderRadius: 30,
       justifyContent: 'center',
       alignItems: 'center',
       margin: 10,
-      borderWidth: 1,
       borderColor: '#DBDBDB',
-      shadowColor: '#000',
-      shadowOffset: {
-        width: 0,
-        height: 5,
-      },
-      shadowOpacity: 0.25,
-      shadowRadius: 3.84,
-
+      borderWidth: 1,
       elevation: 5,
     },
     name: {
@@ -61,7 +63,6 @@ export default function History({ navigation }) {
     },
     row2: {
       marginLeft: '2%',
-
     },
     text1: {
       color: '#2D2D2D',
@@ -81,6 +82,7 @@ export default function History({ navigation }) {
       fontSize: 20,
       fontWeight: "bold",
       textTransform: 'capitalize',
+
     },
     text5: {
       color: '#2D2D2D',
@@ -104,7 +106,6 @@ export default function History({ navigation }) {
       <Text style = {styles.row2}>
         <Text style = {styles.text4}>{item.category}</Text><Text>{"             "}</Text>
         <Text style = {styles.text5}>{item.difficulty}</Text>
-
       </Text>
     </TouchableOpacity>
   ));

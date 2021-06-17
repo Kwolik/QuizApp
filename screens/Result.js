@@ -59,13 +59,16 @@ const Result = ({ navigation, route }) => {
 
   addToHistory = () => {
     history.index = history.index + 1
-    if(global.DIFFICULTY == "")
-      global.DIFFICULTY = "Any" 
-    if(global.NAME == "")
-      global.NAME = "Any" 
-
     global.NAME = global.NAME.replace('Entertainment: ','');
     global.NAME = global.NAME.replace('Science: ','');
+
+  if(global.DIFFICULTY == "")
+    global.DIFFICULTY = "Any" 
+  if(global.NAME == "")
+    global.NAME = "Any" 
+  if(global.NAME == "Japanese Anime & Manga")
+    global.NAME = "Japanese Anime"
+    
 
     let day = new Date().getDate();
     let month = new Date().getMonth() + 1;
@@ -84,13 +87,13 @@ const Result = ({ navigation, route }) => {
       hour = "0" + hour;
     if(min < 10)
       min = "0" + min;
-    if(sec < 10)
-      sec = "0" + sec;
+    // if(sec < 10)
+    //   sec = "0" + sec;
 
     let data = {
         id: history.index,
         date: day + '/' + month + '/' + year,
-        time: hour + ':' + min + ':' + sec,
+        time: hour + ':' + min,
         answers: result + "/" + questionsNumber,
         category: global.NAME,
         difficulty: global.DIFFICULTY,
