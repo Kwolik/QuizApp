@@ -9,15 +9,14 @@ history = {
   index: 0,
   historyArray: [
   // przykładowy rekord dla testów
-  // {
-
-  //   id: 0,
-  //   date: "12.12.2021",
-  //   time: "15:00",
-  //   answers: "10/10",
-  //   category: "Film",
-  //   difficulty: "Medium",
-  // }
+  {
+    id: 0,
+    date: "12/12/2021",
+    time: "15:00",
+    answers: "10/10",
+    category: "Film",
+    difficulty: "Medium",
+  }
 ]
 }
 
@@ -32,7 +31,7 @@ export default function History({ navigation }) {
       flex: 1,
     },
     button: {
-      width: 340,
+      width: 320,
       height: 70,
       backgroundColor: '#FAFAFA',
       borderRadius: 30,
@@ -58,55 +57,65 @@ export default function History({ navigation }) {
       marginTop: 22,
     },
     row1: {
-      marginRight: '3%',
-      marginBottom: '2%',
+      width: 300,
+      alignItems: 'center',
+      flexDirection: 'row',
     },
     row2: {
-      marginLeft: '2%',
+      width: 300,
+      alignItems: 'center',
+      flexDirection: 'row',
     },
-    text1: {
+    date: {
+      width: 100,
       color: '#2D2D2D',
       fontSize: 17,
+      marginRight: 30,
+      marginLeft: 5,
     },
-    text2: {
+    time: {
       color: '#2D2D2D',
       fontSize: 17,
+      marginRight: 50,
     },
-    text3: {
+    result: {
+      width: 60,
       color: '#2D2D2D',
       fontSize: 20,
       fontWeight: "bold",
+      textAlign: 'right',
     },
-    text4: {
+    category: {
+      width: 210,
       color: '#2D2D2D',
       fontSize: 20,
+      marginLeft: 5,
       fontWeight: "bold",
-      textTransform: 'capitalize',
-
     },
-    text5: {
+    difficulty: {
+      width: 70,
+      marginLeft: 3,
+      textAlign: 'right',
       color: '#2D2D2D',
       fontSize: 17,
-      marginRight: '3%',
-      textTransform: 'capitalize',
     },
   });
 
 
 
-  const historyList = history.historyArray.map((item, index) => (
+  const historyList = history.historyArray.map((item) => (
     <TouchableOpacity
       key = {item.id}
       style = {styles.button}>
-      <Text style = {styles.row1}>
-        <Text style = {styles.text1}>{item.date}</Text><Text>{"           "}</Text>
-        <Text style = {styles.text2}>{item.time}</Text><Text>{"             "}</Text>
-        <Text style = {styles.text3}>{item.answers}</Text>
-      </Text>
-      <Text style = {styles.row2}>
-        <Text style = {styles.text4}>{item.category}</Text><Text>{"             "}</Text>
-        <Text style = {styles.text5}>{item.difficulty}</Text>
-      </Text>
+      <View style = {styles.row1}>
+        <Text style = {styles.date}>{item.date}</Text>
+        <Text style = {styles.time}>{item.time}</Text>
+        <Text style = {styles.result}>{item.answers}</Text>
+      </View>
+      <View style = {styles.row2}>
+        <Text style = {styles.category}>{item.category}</Text>
+        <Text style = {styles.difficulty}>{item.difficulty}</Text>
+      </View>
     </TouchableOpacity>
   ));
 
