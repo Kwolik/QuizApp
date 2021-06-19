@@ -1,22 +1,21 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, AsyncStorage } from 'react-native';
 
 import bg from '../assets/bg.png';
 import BottomMenu from '../components/BottomMenu';
 
 
 history = {
-  index: 0,
   historyArray: [
   // przykładowy rekord dla testów
-  {
-    id: 0,
-    date: "12/12/2021",
-    time: "15:00",
-    answers: "10/10",
-    category: "Film",
-    difficulty: "Medium",
-  }
+  // {
+  //   id: 0,
+  //   date: "12/12/2021",
+  //   time: "15:00",
+  //   answers: "10/10",
+  //   category: "Film",
+  //   difficulty: "Medium",
+  // }
 ]
 }
 
@@ -100,6 +99,30 @@ export default function History({ navigation }) {
       fontSize: 17,
     },
   });
+
+  loadHistory = async () => {
+    try{
+      if(history.historyArray.length == 0){
+        if(JSON.parse(await AsyncStorage.getItem('history')) != 0){
+          history.historyArray = JSON.parse(await AsyncStorage.getItem('history'));
+          setHistory(history.historyArray);
+        }
+      }
+    }catch(error){
+      alert(error);
+    }
+  }
+
+  const [hist, setHistory] = React.useState([]);
+
+  React.useEffect(() => {
+    loadHistory();
+  }, []);
+
+  // clearAsync = ()=> {
+  //   history.historyArray = 0;
+  //   AsyncStorage.setItem('history',JSON.stringify(history.historyArray));
+  // }
 
 
 
