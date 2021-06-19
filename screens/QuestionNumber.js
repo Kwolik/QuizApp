@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, useColorScheme } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import bg from '../assets/bg.png';
+import darkbg from '../assets/darkBackground.png';
 
 export default function QuestionNumber({ navigation }) {
   const styles = StyleSheet.create({
@@ -20,19 +21,16 @@ export default function QuestionNumber({ navigation }) {
     },
     title: {
       fontSize: 42,
-      color: '#2D2D2D',
       marginTop: 22,
     },
     button: {
       width: 320,
       height: 50,
-      backgroundColor: '#FAFAFA',
       borderRadius: 18,
       justifyContent: 'center',
       alignItems: 'center',
       margin: 10,
       borderWidth: 1,
-      borderColor: '#DBDBDB',
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -49,33 +47,58 @@ export default function QuestionNumber({ navigation }) {
       height: '52%',
     },
     name: {
-      color: '#2D2D2D',
       fontSize: 18,
+    },
+    lightThemeBackground: {
+      backgroundColor: '#FAFAFA'
+    },
+    darkThemeBackround: 
+    {
+      backgroundColor: '#2D2D2D'
+    },
+    lightThemeTitle: {
+      color: '#2D2D2D',
+    },
+    darkThemeTitle: {
+      color: '#FAFAFA',
+    },
+    lightThemeButton: {
+      backgroundColor: '#FAFAFA',
+      borderColor: '#DBDBDB',
+    },
+    darkThemeButton: {
+      backgroundColor: '#474747',
+      borderColor: '#000000',
     },
   });
 
   const number = [6, 7, 8, 9, 10, 11, 12];
 
+  const colorScheme = useColorScheme();
+  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
+
   const numberList = number.map((numbers) => (
     <TouchableOpacity
       key={numbers}
-      style={styles.button}
+      style={[styles.button, themeButtonStyle]}
       onPress={() => {
         global.NUMBER = numbers;
         navigation.navigate('Question');
       }}
     >
-      <Text style={styles.name}>{numbers}</Text>
+      <Text style={[styles.name, themeTitleStyle]}>{numbers}</Text>
     </TouchableOpacity>
   ));
 
   return (
-    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
       <View style={styles.container}>
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back-ios" size={28} color={'#2D2D2D'} />
+          <MaterialIcons name="arrow-back-ios" size={28} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
         </TouchableOpacity>
-        <Text style={styles.title}>Quiz number</Text>
+        <Text style={[styles.title, themeTitleStyle]}>Quiz number</Text>
         <View style={styles.list}>
           <ScrollView showsVerticalScrollIndicator={false}>{numberList}</ScrollView>
         </View>

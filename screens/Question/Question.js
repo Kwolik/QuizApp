@@ -1,10 +1,12 @@
 import React from 'react';
-import { View, ImageBackground, Text, Image, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, ImageBackground, Text, Image, StyleSheet, ActivityIndicator, useColorScheme } from 'react-native';
 
 import { getQuestions } from '../../services';
-import bg from '../../assets/bg.png';
 import QuestionDetails from './QuestionDetails';
-import Logo from '../../assets/logo.png';
+import bg from '../../assets/bg.png';
+import darkbg from '../../assets/darkBackground.png';
+import logo from '../../assets/logo.png';
+import whiteLogo from '../../assets/whiteLogo.png';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,44 +18,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 42,
-    color: '#2D2D2D',
     marginTop: 22,
-  },
-  question: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    minHeight: 120,
-    width: '100%',
-    padding: 16,
-  },
-  button: {
-    width: 320,
-    height: 50,
-    backgroundColor: '#FAFAFA',
-    borderRadius: 18,
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: 10,
-    borderWidth: 1,
-    borderColor: '#DBDBDB',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 5,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-
-    elevation: 5,
-  },
-  list: {
-    margin: 10,
-    height: '52%',
-  },
-  name: {
-    color: '#2D2D2D',
-    fontSize: 18,
   },
   logo: {
     width: 290,
@@ -61,9 +26,21 @@ const styles = StyleSheet.create({
     marginTop: 185,
   },
   text: {
-    color: 'black',
     fontSize: 18,
     maxWidth: '80%',
+  },
+  lightThemeBackground: {
+    backgroundColor: '#FAFAFA'
+  },
+  darkThemeBackround: 
+  {
+    backgroundColor: '#2D2D2D'
+  },
+  lightThemeTitle: {
+    color: '#2D2D2D',
+  },
+  darkThemeTitle: {
+    color: '#FAFAFA',
   },
 });
 
@@ -73,6 +50,10 @@ const Question = ({ navigation }) => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [message, setMessage] = React.useState('Download data in progress...');
   const [correctCounter, setCorrectCounter] = React.useState(0);
+
+  const colorScheme = useColorScheme();
+  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
 
   React.useEffect(() => {
     getQuestions(CATEGORY, NUMBER, DIFFICULTY, TYPE).then((res) => validationRequest(res));
@@ -105,18 +86,18 @@ const Question = ({ navigation }) => {
   };
 
   return (
-    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
       <View style={styles.container}>
         {isLoading ? (
           <>
             <View>
-              <Image source={Logo} style={styles.logo} />
+              <Image source={colorScheme === 'light' ? logo : whiteLogo} style={styles.logo} />
             </View>
             <View style={styles.horizontal}>
-              <ActivityIndicator size={100} color="#999999" />
+              <ActivityIndicator size={100} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
             </View>
             <View>
-              <Text style={styles.text}>{message}</Text>
+              <Text style={[styles.text, themeTitleStyle]}>{message}</Text>
             </View>
           </>
         ) : (
