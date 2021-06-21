@@ -9,37 +9,33 @@ export default function About({ navigation }) {
     container: {
       flex: 1,
       alignItems: 'center',
-      //justifyContent: "center",
     },
     back: {
       flex: 1,
     },
     authorsStyle: {
-      //textAlign: 'center',
-      textAlign: 'center',
+      alignSelf: 'stretch',
+      marginLeft: '10%',
+      textAlign: 'left',
       fontWeight: 'bold',
       color: 'black',
-      fontSize: 24,
-      marginHorizontal: '5%',
-      marginTop: -80,
-      marginBottom: 110,
-      justifyContent: "center",
+      fontSize: 16,
+      marginTop: -30,
+      marginBottom: 140,
     },
     names: {
-      //textAlign: 'center',
-      textAlign: 'center',
       color: 'black',
-      fontSize: 20,
-      marginHorizontal: '5%',
-      marginTop: -110,
-      marginBottom: 110,
-      justifyContent: "center",
+      textAlign: 'left',
+      fontSize: 15,
+      marginTop: -130,
+      marginBottom: 190,
     },
     imageStyle: {
       flex: 1,
-      width: '100%', 
-      height: '100%',
+      width: '90%', 
+      height: '90%',
       resizeMode: 'contain',
+      marginTop: 50,
     },
   });
 
@@ -48,7 +44,7 @@ export default function About({ navigation }) {
       <View style={styles.container}>
       <Image style={styles.imageStyle} source={require('../assets/authorsAsset.png')}/>
       <Text style={styles.authorsStyle}> Authors: </Text>
-      <Text style={styles.names}> • Remigiusz Drobiński • Kamil Donda • Daniel Piątek • Robert Kwoll • Robert Olej • Michał Łepik </Text>
+      <Text style={styles.names}> Kamil Donda   Daniel Piątek {"\n"} Robert Kwoll   Robert Olej </Text>
       <BottomMenu navigation={navigation} />
       </View>
     </ImageBackground>
