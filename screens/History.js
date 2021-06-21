@@ -153,6 +153,5 @@ export default function History({ navigation }) {
         <BottomMenu navigation={navigation} />
       </View>
     </ImageBackground>
-  );
+  );  
 }
-
