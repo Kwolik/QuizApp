@@ -77,6 +77,7 @@ export default function Category({ navigation }) {
       style={styles.button}
       onPress={() => {
         global.CATEGORY = categories.id;
+        global.NAME = categories.name;
         navigation.navigate('Difficulty');
       }}
     >
@@ -101,6 +102,7 @@ export default function Category({ navigation }) {
               style={styles.button}
               onPress={() => {
                 global.CATEGORY = "";
+                global.NAME = "";
                 navigation.navigate('Difficulty');
               }}
             >
