@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, useColorScheme } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import bg from '../assets/bg.png';
+import darkbg from '../assets/darkBackground.png';
 
 export default function Category({ navigation }) {
   const styles = StyleSheet.create({
@@ -20,19 +21,16 @@ export default function Category({ navigation }) {
     },
     title: {
       fontSize: 42,
-      color: '#2D2D2D',
       marginTop: 22,
     },
     button: {
       width: 320,
       height: 50,
-      backgroundColor: '#FAFAFA',
       borderRadius: 18,
       justifyContent: 'center',
       alignItems: 'center',
       margin: 10,
       borderWidth: 1,
-      borderColor: '#DBDBDB',
       shadowColor: '#000',
       shadowOffset: {
         width: 0,
@@ -52,9 +50,35 @@ export default function Category({ navigation }) {
       color: '#2D2D2D',
       fontSize: 18,
     },
+    lightThemeBackground: {
+      backgroundColor: '#FAFAFA'
+    },
+    darkThemeBackround: 
+    {
+      backgroundColor: '#2D2D2D'
+    },
+    lightThemeTitle: {
+      color: '#2D2D2D',
+    },
+    darkThemeTitle: {
+      color: '#FAFAFA',
+    },
+    lightThemeButton: {
+      backgroundColor: '#FAFAFA',
+      borderColor: '#DBDBDB',
+    },
+    darkThemeButton: {
+      backgroundColor: '#474747',
+      borderColor: '#000000',
+    },
   });
 
   const [category, setCategory] = React.useState([]);
+
+  const colorScheme = useColorScheme();
+  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
 
   const getMovieRequest = async () => {
     const url = `https://opentdb.com/api_category.php`;
@@ -71,17 +95,17 @@ export default function Category({ navigation }) {
     getMovieRequest();
   }, []);
 
-  const categoryList = category.map((categories) => (
+  const categoryList = category.sort((a, b) => a.name > b.name).map((categories) => (
     <TouchableOpacity
       key={categories.id}
-      style={styles.button}
+      style={[styles.button, themeButtonStyle]}
       onPress={() => {
         global.CATEGORY = categories.id;
         global.NAME = categories.name;
         navigation.navigate('Difficulty');
       }}
     >
-      <Text style={styles.name}>
+      <Text style={[styles.name, themeTitleStyle]}>
         {categories.name.search('Entertainment') === 0
           ? categories.name.replace('Entertainment: ', '')
           : categories.name.replace('Science: ', '')}
@@ -90,23 +114,23 @@ export default function Category({ navigation }) {
   ));
 
   return (
-    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
       <View style={styles.container}>
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back-ios" size={28} color={'#2D2D2D'} />
+          <MaterialIcons name="arrow-back-ios" size={28} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
         </TouchableOpacity>
-        <Text style={styles.title}>Category</Text>
+        <Text style={[styles.title, themeTitleStyle]}>Category</Text>
         <View style={styles.list}>
           <ScrollView showsVerticalScrollIndicator={false}>
             <TouchableOpacity
-              style={styles.button}
+              style={[styles.button, themeButtonStyle]}
               onPress={() => {
                 global.CATEGORY = "";
                 global.NAME = "";
                 navigation.navigate('Difficulty');
               }}
             >
-              <Text style={styles.name}>Any</Text>
+              <Text style={[styles.name, themeTitleStyle]}>Any</Text>
             </TouchableOpacity>
           {categoryList}
           </ScrollView>

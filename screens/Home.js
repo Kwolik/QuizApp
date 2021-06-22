@@ -1,8 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground } from 'react-native';
+import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground, useColorScheme } from 'react-native';
 
 import bg from '../assets/bg.png';
-import Logo from '../assets/logo.png';
+import darkbg from '../assets/darkBackground.png';
+import logo from '../assets/logo.png';
+import whiteLogo from '../assets/whiteLogo.png';
 import BottomMenu from '../components/BottomMenu';
 
 export default function Home({ navigation }) {
@@ -17,7 +19,6 @@ export default function Home({ navigation }) {
     button: {
       width: 250,
       height: 48,
-      backgroundColor: '#FF5656',
       borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
@@ -33,19 +34,35 @@ export default function Home({ navigation }) {
       height: 175,
       marginTop: 185,
     },
+    lightThemeBackground:{
+      backgroundColor: '#FAFAFA'
+    },
+    darkThemeBackround: {
+      backgroundColor: '#2D2D2D'
+    },
+    lightThemeButton: {
+      backgroundColor: '#FF5656',
+    },
+    darkThemeButton: {
+      backgroundColor: '#CC8406',
+    }
   });
 
+  const colorScheme = useColorScheme();
+  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
+
   const startButton = (
-    <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Category')}>
+    <TouchableOpacity style={[styles.button, themeButtonStyle]} onPress={() => navigation.navigate('Category')}>
       <Text style={styles.text}>Start</Text>
     </TouchableOpacity>
   );
 
   return (
-    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
       <View style={styles.container}>
         <View>
-          <Image source={Logo} style={styles.logo} />
+          <Image source={colorScheme === 'light' ? logo : whiteLogo} style={styles.logo} />
         </View>
         <View>{startButton}</View>
         <BottomMenu navigation={navigation} />
