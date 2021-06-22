@@ -47,7 +47,7 @@ export default function About({ navigation }) {
       fontSize: 20,
     },
     authors: {
-      marginTop: 30,
+      marginTop: 20,
     },
     names: {
       color: 'black',
@@ -129,7 +129,7 @@ export default function About({ navigation }) {
           />
         </TouchableOpacity>
         <Text style={[styles.title, themeTitleStyle]}>About</Text>
-        <View style={{ marginHorizontal: 50, width: '100%', marginTop: 50 }}>
+        <View style={{ marginHorizontal: 50, width: '100%', marginTop: 40 }}>
           {logo(github, github_dark, 'Github', 'https://github.com/KamilDonda/QuizApp')}
           {logo(polsl, polsl, 'Silesian University of Technology', 'https://www.polsl.pl/')}
           {logo(rms, rms, 'Faculty of Applied Mathematics', 'https://www.polsl.pl/rms/')}
