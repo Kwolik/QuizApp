@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, AsyncStorage } from 'react-native';
+import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, AsyncStorage, useColorScheme } from 'react-native';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import bg from '../assets/bg.png';
+import darkbg from '../assets/darkBackground.png';
 import BottomMenu from '../components/BottomMenu';
-
 
 history = {
   historyArray: [
@@ -19,7 +20,6 @@ history = {
 ]
 }
 
-
 export default function History({ navigation }) {
   const styles = StyleSheet.create({
     container: {
@@ -29,10 +29,14 @@ export default function History({ navigation }) {
     back: {
       flex: 1,
     },
+    arrow: {
+      position: 'absolute',
+      left: 20,
+      top: 40,
+    },
     button: {
       width: 320,
       height: 70,
-      backgroundColor: '#FAFAFA',
       borderRadius: 30,
       justifyContent: 'center',
       alignItems: 'center',
@@ -42,7 +46,6 @@ export default function History({ navigation }) {
       elevation: 5,
     },
     name: {
-      color: '#2D2D2D',
       fontSize: 18,
     },
     list: {
@@ -52,7 +55,6 @@ export default function History({ navigation }) {
     },
     title: {
       fontSize: 42,
-      color: '#2D2D2D',
       marginTop: 22,
     },
     row1: {
@@ -67,26 +69,22 @@ export default function History({ navigation }) {
     },
     date: {
       width: 100,
-      color: '#2D2D2D',
       fontSize: 17,
       marginRight: 30,
       marginLeft: 5,
     },
     time: {
-      color: '#2D2D2D',
       fontSize: 17,
       marginRight: 50,
     },
     result: {
       width: 60,
-      color: '#2D2D2D',
       fontSize: 20,
       fontWeight: "bold",
       textAlign: 'right',
     },
     category: {
       width: 210,
-      color: '#2D2D2D',
       fontSize: 20,
       marginLeft: 5,
       fontWeight: "bold",
@@ -95,9 +93,35 @@ export default function History({ navigation }) {
       width: 70,
       marginLeft: 3,
       textAlign: 'right',
-      color: '#2D2D2D',
       fontSize: 17,
     },
+    lightThemeBackground: {
+      backgroundColor: '#FAFAFA'
+    },
+    darkThemeBackround: 
+    {
+      backgroundColor: '#2D2D2D'
+    },
+    lightThemeTitle: {
+      color: '#2D2D2D',
+    },
+    darkThemeTitle: {
+      color: '#FAFAFA',
+    },
+    lightThemeText: {
+      color: '#2D2D2D'
+    },
+    darkThemeText: {
+      color: '#DBDBDB',
+    },
+    lightThemeButton: {
+      backgroundColor: '#FAFAFA',
+      borderColor: '#DBDBDB'
+    },
+    darkThemeButton: {
+      backgroundColor: '#474747',
+      borderColor: '#000000'
+    }
   });
 
   loadHistory = async () => {
@@ -124,29 +148,35 @@ export default function History({ navigation }) {
   //   AsyncStorage.setItem('history',JSON.stringify(history.historyArray));
   // }
 
-
+  const colorScheme = useColorScheme();
+  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
+  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
 
   const historyList = history.historyArray.map((item) => (
     <TouchableOpacity
       key = {item.id}
-      style = {styles.button}>
+      style = {[styles.button, themeButtonStyle]}>
       <View style = {styles.row1}>
-        <Text style = {styles.date}>{item.date}</Text>
-        <Text style = {styles.time}>{item.time}</Text>
-        <Text style = {styles.result}>{item.answers}</Text>
+        <Text style = {[styles.date, themeTextStyle]}>{item.date}</Text>
+        <Text style = {[styles.time, themeTextStyle]}>{item.time}</Text>
+        <Text style = {[styles.result, themeTextStyle]}>{item.answers}</Text>
       </View>
       <View style = {styles.row2}>
-        <Text style = {styles.category}>{item.category}</Text>
-        <Text style = {styles.difficulty}>{item.difficulty}</Text>
+        <Text style = {[styles.category, themeTextStyle]}>{item.category}</Text>
+        <Text style = {[styles.difficulty, themeTextStyle]}>{item.difficulty}</Text>
       </View>
     </TouchableOpacity>
   ));
 
   return (
-    
-    <ImageBackground source={bg} style={styles.back} resizeMode="stretch">
+    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
       <View style={styles.container}>
-        <Text style={styles.title}>History</Text>
+        <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
+          <MaterialIcons name="arrow-back-ios" size={28} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
+        </TouchableOpacity>
+        <Text style={[styles.title, themeTitleStyle]}>History</Text>
         <View style={styles.list}>
           <ScrollView showsVerticalScrollIndicator={false}>{historyList}</ScrollView>
         </View>
