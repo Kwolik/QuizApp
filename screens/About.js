@@ -1,10 +1,24 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, Text, Image, TouchableOpacity, useColorScheme } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Text,
+  Image,
+  TouchableOpacity,
+  useColorScheme,
+  Linking
+} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import bg from '../assets/bg.png';
 import darkbg from '../assets/darkBackground.png';
 import BottomMenu from '../components/BottomMenu';
+
+import github from '../assets/github.png';
+import github_dark from '../assets/github_dark.png';
+import polsl from '../assets/polsl.png';
+import rms from '../assets/rms.png';
 
 export default function About({ navigation }) {
   const styles = StyleSheet.create({
@@ -33,7 +47,7 @@ export default function About({ navigation }) {
       fontSize: 20,
     },
     authors: {
-      marginTop: 10,
+      marginTop: 30,
     },
     names: {
       color: 'black',
@@ -42,18 +56,15 @@ export default function About({ navigation }) {
     },
     imageStyle: {
       width: '95%',
-      height: '40%', 
+      height: '40%',
       resizeMode: 'contain',
       marginTop: 45,
-      // borderWidth: 2,
-      // borderColor: 'red',
     },
     lightThemeBackground: {
-      backgroundColor: '#FAFAFA'
+      backgroundColor: '#FAFAFA',
     },
-    darkThemeBackround: 
-    {
-      backgroundColor: '#2D2D2D'
+    darkThemeBackround: {
+      backgroundColor: '#2D2D2D',
     },
     lightThemeTitle: {
       color: '#2D2D2D',
@@ -61,23 +72,74 @@ export default function About({ navigation }) {
     darkThemeTitle: {
       color: '#FAFAFA',
     },
+    logoImage: {
+      justifyContent: 'flex-start',
+      width: 70,
+      height: 70,
+    },
+    logoText: {
+      justifyContent: 'flex-end',
+      height: 70,
+      textAlignVertical: 'center',
+      fontSize: 20,
+      marginLeft: 20,
+      maxWidth: 200,
+    },
   });
 
   const colorScheme = useColorScheme();
-  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
-  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
+  const themeBackgroundStyle =
+    colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround;
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle;
+
+  function logo(a, b, text, link) {
+    return (
+      <TouchableOpacity
+        style={{
+          flexDirection: 'row',
+          marginHorizontal: 50,
+          height: 100,
+          alignItems: 'center',
+          marginRight: 30,
+        }}
+        onPress={() => Linking.openURL(link)}
+      >
+        <View>
+          <Image style={styles.logoImage} source={colorScheme === 'light' ? a : b} />
+        </View>
+        <View>
+          <Text style={[styles.logoText, themeTitleStyle]}>{text}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
 
   return (
-    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
+    <ImageBackground
+      source={colorScheme === 'light' ? bg : darkbg}
+      style={[styles.back, themeBackgroundStyle]}
+      resizeMode="stretch"
+    >
       <View style={styles.container}>
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back-ios" size={28} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
+          <MaterialIcons
+            name="arrow-back-ios"
+            size={28}
+            color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'}
+          />
         </TouchableOpacity>
         <Text style={[styles.title, themeTitleStyle]}>About</Text>
-        <Image style={styles.imageStyle} source={colorScheme === 'light' ? require('../assets/authorsAsset.png') : require('../assets/DarkmodeAuthorsAsset.png')}/>
+        <View style={{ marginHorizontal: 50, width: '100%', marginTop: 50 }}>
+          {logo(github, github_dark, 'Github', 'https://github.com/KamilDonda/QuizApp')}
+          {logo(polsl, polsl, 'Silesian University of Technology', 'https://www.polsl.pl/')}
+          {logo(rms, rms, 'Faculty of Applied Mathematics', 'https://www.polsl.pl/rms/')}
+        </View>
         <View style={styles.authors}>
           <Text style={[styles.authorsStyle, themeTitleStyle]}> Authors: </Text>
-          <Text style={[styles.names, themeTitleStyle]}> Kamil Donda   Daniel Piątek {"\n"} Robert Kwoll   Robert Olej </Text>
+          <Text style={[styles.names, themeTitleStyle]}>
+            {' '}
+            Kamil Donda Daniel Piątek {'\n'} Robert Kwoll Robert Olej{' '}
+          </Text>
         </View>
         <BottomMenu navigation={navigation} />
       </View>
