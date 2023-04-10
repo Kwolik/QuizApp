@@ -1,5 +1,14 @@
 import React from 'react';
-import { StyleSheet, View, Image, Text, TouchableOpacity, ImageBackground, useColorScheme } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  TouchableOpacity,
+  ImageBackground,
+  useColorScheme,
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import bg from '../assets/bg.png';
 import darkbg from '../assets/darkBackground.png';
@@ -34,32 +43,58 @@ export default function Home({ navigation }) {
       height: 175,
       marginTop: 185,
     },
-    lightThemeBackground:{
-      backgroundColor: '#FAFAFA'
+    lightThemeBackground: {
+      backgroundColor: '#FAFAFA',
     },
     darkThemeBackround: {
-      backgroundColor: '#2D2D2D'
+      backgroundColor: '#2D2D2D',
     },
     lightThemeButton: {
       backgroundColor: '#FF5656',
     },
     darkThemeButton: {
       backgroundColor: '#CC8406',
-    }
+    },
   });
 
   const colorScheme = useColorScheme();
-  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
-  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
+  const themeBackgroundStyle =
+    colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround;
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton;
+
+  loadHistory = async () => {
+    try {
+      if (history.historyArray.length == 0) {
+        if (JSON.parse(await AsyncStorage.getItem('history')) != 0) {
+          history.historyArray = JSON.parse(await AsyncStorage.getItem('history'));
+        }
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  React.useEffect(() => {
+    loadHistory();
+  });
+
+  console.log(history.historyArray);
 
   const startButton = (
-    <TouchableOpacity style={[styles.button, themeButtonStyle]} onPress={() => navigation.navigate('Category')}>
+    <TouchableOpacity
+      style={[styles.button, themeButtonStyle]}
+      onPress={() => navigation.navigate('Category')}
+    >
       <Text style={styles.text}>Start</Text>
     </TouchableOpacity>
   );
 
   return (
-    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
+    <ImageBackground
+      source={colorScheme === 'light' ? bg : darkbg}
+      style={[styles.back, themeBackgroundStyle]}
+      resizeMode="stretch"
+    >
       <View style={styles.container}>
         <View>
           <Image source={colorScheme === 'light' ? logo : whiteLogo} style={styles.logo} />

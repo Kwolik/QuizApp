@@ -1,5 +1,13 @@
 import React from 'react';
-import { StyleSheet, View, ImageBackground, TouchableOpacity, Text, ScrollView, AsyncStorage, useColorScheme } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+  Text,
+  ScrollView,
+  useColorScheme,
+} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import bg from '../assets/bg.png';
@@ -8,17 +16,17 @@ import BottomMenu from '../components/BottomMenu';
 
 history = {
   historyArray: [
-  // przykładowy rekord dla testów
-  // {
-  //   id: 0,
-  //   date: "12/12/2021",
-  //   time: "15:00",
-  //   answers: "10/10",
-  //   category: "Film",
-  //   difficulty: "Medium",
-  // }
-]
-}
+    // przykładowy rekord dla testów
+    // {
+    //   id: 0,
+    //   date: "12/12/2021",
+    //   time: "15:00",
+    //   answers: "10/10",
+    //   category: "Film",
+    //   difficulty: "Medium",
+    // }
+  ],
+};
 
 export default function History({ navigation }) {
   const styles = StyleSheet.create({
@@ -80,14 +88,14 @@ export default function History({ navigation }) {
     result: {
       width: 60,
       fontSize: 20,
-      fontWeight: "bold",
+      fontWeight: 'bold',
       textAlign: 'right',
     },
     category: {
       width: 210,
       fontSize: 20,
       marginLeft: 5,
-      fontWeight: "bold",
+      fontWeight: 'bold',
     },
     difficulty: {
       width: 70,
@@ -96,11 +104,10 @@ export default function History({ navigation }) {
       fontSize: 17,
     },
     lightThemeBackground: {
-      backgroundColor: '#FAFAFA'
+      backgroundColor: '#FAFAFA',
     },
-    darkThemeBackround: 
-    {
-      backgroundColor: '#2D2D2D'
+    darkThemeBackround: {
+      backgroundColor: '#2D2D2D',
     },
     lightThemeTitle: {
       color: '#2D2D2D',
@@ -109,39 +116,20 @@ export default function History({ navigation }) {
       color: '#FAFAFA',
     },
     lightThemeText: {
-      color: '#2D2D2D'
+      color: '#2D2D2D',
     },
     darkThemeText: {
       color: '#DBDBDB',
     },
     lightThemeButton: {
       backgroundColor: '#FAFAFA',
-      borderColor: '#DBDBDB'
+      borderColor: '#DBDBDB',
     },
     darkThemeButton: {
       backgroundColor: '#474747',
-      borderColor: '#000000'
-    }
+      borderColor: '#000000',
+    },
   });
-
-  loadHistory = async () => {
-    try{
-      if(history.historyArray.length == 0){
-        if(JSON.parse(await AsyncStorage.getItem('history')) != 0){
-          history.historyArray = JSON.parse(await AsyncStorage.getItem('history'));
-          setHistory(history.historyArray);
-        }
-      }
-    }catch(error){
-      alert(error);
-    }
-  }
-
-  const [hist, setHistory] = React.useState([]);
-
-  React.useEffect(() => {
-    loadHistory();
-  }, []);
 
   // clearAsync = ()=> {
   //   history.historyArray = 0;
@@ -149,32 +137,41 @@ export default function History({ navigation }) {
   // }
 
   const colorScheme = useColorScheme();
-  const themeBackgroundStyle = colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround
-  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle
-  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText
-  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton
+  const themeBackgroundStyle =
+    colorScheme === 'light' ? styles.lightThemeBackground : styles.darkThemeBackround;
+  const themeTitleStyle = colorScheme === 'light' ? styles.lightThemeTitle : styles.darkThemeTitle;
+  const themeTextStyle = colorScheme === 'light' ? styles.lightThemeText : styles.darkThemeText;
+  const themeButtonStyle = colorScheme === 'light' ? styles.lightThemeButton : styles.darkThemeButton;
 
-  const historyList = history.historyArray.map((item) => (
-    <TouchableOpacity
-      key = {item.id}
-      style = {[styles.button, themeButtonStyle]}>
-      <View style = {styles.row1}>
-        <Text style = {[styles.date, themeTextStyle]}>{item.date}</Text>
-        <Text style = {[styles.time, themeTextStyle]}>{item.time}</Text>
-        <Text style = {[styles.result, themeTextStyle]}>{item.answers}</Text>
-      </View>
-      <View style = {styles.row2}>
-        <Text style = {[styles.category, themeTextStyle]}>{item.category}</Text>
-        <Text style = {[styles.difficulty, themeTextStyle]}>{item.difficulty}</Text>
-      </View>
-    </TouchableOpacity>
-  ));
+  const historyList =
+    history.historyArray != null &&
+    history.historyArray.map((item) => (
+      <TouchableOpacity key={item.id} style={[styles.button, themeButtonStyle]}>
+        <View style={styles.row1}>
+          <Text style={[styles.date, themeTextStyle]}>{item.date}</Text>
+          <Text style={[styles.time, themeTextStyle]}>{item.time}</Text>
+          <Text style={[styles.result, themeTextStyle]}>{item.answers}</Text>
+        </View>
+        <View style={styles.row2}>
+          <Text style={[styles.category, themeTextStyle]}>{item.category}</Text>
+          <Text style={[styles.difficulty, themeTextStyle]}>{item.difficulty}</Text>
+        </View>
+      </TouchableOpacity>
+    ));
 
   return (
-    <ImageBackground source={colorScheme === 'light' ? bg : darkbg} style={[styles.back, themeBackgroundStyle]} resizeMode="stretch">
+    <ImageBackground
+      source={colorScheme === 'light' ? bg : darkbg}
+      style={[styles.back, themeBackgroundStyle]}
+      resizeMode="stretch"
+    >
       <View style={styles.container}>
         <TouchableOpacity style={styles.arrow} onPress={() => navigation.goBack()}>
-          <MaterialIcons name="arrow-back-ios" size={28} color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'} />
+          <MaterialIcons
+            name="arrow-back-ios"
+            size={28}
+            color={colorScheme === 'light' ? '#2D2D2D' : '#FAFAFA'}
+          />
         </TouchableOpacity>
         <Text style={[styles.title, themeTitleStyle]}>History</Text>
         <View style={styles.list}>
@@ -183,5 +180,5 @@ export default function History({ navigation }) {
         <BottomMenu navigation={navigation} />
       </View>
     </ImageBackground>
-  );  
+  );
 }
