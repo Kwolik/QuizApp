@@ -1,23 +1,28 @@
-import React from 'react';
-import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
+import React from "react";
+import { createStackNavigator } from "@react-navigation/stack";
+import { NavigationContainer } from "@react-navigation/native";
 
-import HomeScreen from './screens/Home';
-import AboutScreen from './screens/About';
-import HistoryScreen from './screens/History';
-import CategoryScreen from './screens/Category';
-import QuestionScreen from './screens/Question/Question';
-import QuestionNumber from './screens/QuestionNumber';
-import TypeScreen from './screens/Type';
-import DifficultyScreen from './screens/Difficulty';
-import ResultScreen from './screens/Result';
+import HomeScreen from "./screens/Home";
+import AboutScreen from "./screens/About";
+import HistoryScreen from "./screens/History";
+import CategoryScreen from "./screens/Category";
+import QuestionScreen from "./screens/Question/Question";
+import QuestionNumber from "./screens/QuestionNumber";
+import TypeScreen from "./screens/Type";
+import DifficultyScreen from "./screens/Difficulty";
+import ResultScreen from "./screens/Result";
 
 export default function Navigation() {
   const Stack = createStackNavigator();
 
   return (
     <NavigationContainer>
-      <Stack.Navigator headerMode="none" initialRouteName="Home">
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          headerMode: "false",
+        }}
+      >
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="About" component={AboutScreen} />
         <Stack.Screen name="History" component={HistoryScreen} />
